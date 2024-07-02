@@ -7,7 +7,7 @@ const categoryRouter = require("./routes/category");
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 80;
 
 // 미들웨어 선언
 app.use(cors());
