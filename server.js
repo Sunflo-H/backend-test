@@ -20,6 +20,10 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+app.get("/", (req, res) => {
+  res.send("hi");
+});
+
 // Routes
 app.use("/products", productsRouter);
 
