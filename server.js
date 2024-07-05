@@ -32,7 +32,7 @@ async function connectToMongoDB() {
 connectToMongoDB();
 
 app.get("/", (req, res) => {
-  res.send("hi");
+  res.send("hi hello");
 });
 
 // Routes
