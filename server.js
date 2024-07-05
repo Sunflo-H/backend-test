@@ -15,18 +15,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
+
+async function connectToMongoDB() {
+  try {
+    console.log("몽고디비 연결 시도!");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("몽고디비 연결 성공");
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log("몽고디비 연결 실패");
     console.log("그 에러 원인이다 : ", err);
-  });
+  }
+}
+connectToMongoDB();
 
 app.get("/", (req, res) => {
   res.send("hi");
