@@ -34,7 +34,7 @@ const productSchema = new Schema({
   },
 });
 
-// 모델 이름은 Product, 컬렉션이름은 Products 임을 명시적으로 설정
-const Product = mongoose.model("Product", productSchema, "Products"); // 모델을 생성하여 몽고디비 컬렉션과 상호작용
+// 모델 이름은 Product, 컬렉션이름은 Product 임을 명시적으로 설정
+const Product = mongoose.model("Product", productSchema, "Product"); // 모델을 생성하여 몽고디비 컬렉션과 상호작용
 
 module.exports = Product;
