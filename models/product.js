@@ -32,6 +32,13 @@ const productSchema = new Schema({
     ref: "Category", // Category 컬렉션을 참조
     required: true,
   },
+  color: [{ type: String, trim: true }], // ["S","M","L","XL"]
+  size: [{ type: String, trim: true }], // ["Black", "Red", "Green", "Blue", "Yellow"]
+  status: {
+    // "Sale", "hide", ""
+    type: String,
+    required: true,
+  },
 });
 
 // 모델 이름은 Product, 컬렉션이름은 Product 임을 명시적으로 설정

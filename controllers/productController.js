@@ -26,7 +26,6 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.getAllProducts = async (req, res) => {
-  console.log(Product);
   try {
     const products = await Product.find().populate("category_id");
     res.status(200).json(products);
