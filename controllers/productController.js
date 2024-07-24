@@ -2,7 +2,7 @@ const Product = require("../models/product");
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, imageUrl, category_id } = req.body;
+    const { name, description, price, imageUrl, category } = req.body;
 
     // 새 상품 객체 생성
     const newProduct = new Product({
@@ -10,7 +10,7 @@ exports.createProduct = async (req, res) => {
       description,
       price,
       imageUrl,
-      category_id,
+      category,
       createdAt: new Date(),
     });
 
@@ -27,7 +27,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("category_id");
+    const products = await Product.find().populate("category");
     res.status(200).json(products);
   } catch (error) {
     console.log("상품 읽기 실패 : ", error);
@@ -37,9 +37,7 @@ exports.getAllProducts = async (req, res) => {
 
 exports.getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id).populate(
-      "category_id"
-    );
+    const product = await Product.findById(req.params.id).populate("category");
     if (!product) {
       return res.status(404).json({ error: "상품을 찾을 수 없습니다." });
     }

@@ -27,7 +27,7 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  category_id: {
+  category: {
     type: Schema.Types.ObjectId,
     ref: "Category", // Category 컬렉션을 참조
     required: true,
@@ -39,9 +39,14 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  stock: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
 });
 
 // 모델 이름은 Product, 컬렉션이름은 Product 임을 명시적으로 설정
-const Product = mongoose.model("Product", productSchema, "Product"); // 모델을 생성하여 몽고디비 컬렉션과 상호작용
+const Product = mongoose.model("Product", productSchema, "Products"); // 모델을 생성하여 몽고디비 컬렉션과 상호작용
 
 module.exports = Product;
