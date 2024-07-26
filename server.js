@@ -4,6 +4,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
+const { S3Client } = require("@aws-sdk/client-s3");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
 require("dotenv").config();
 
 const app = express();
@@ -15,7 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
-
 async function connectToMongoDB() {
   try {
     console.log("몽고디비 연결 시도!");
@@ -31,6 +33,25 @@ async function connectToMongoDB() {
 }
 connectToMongoDB();
 
+// AWS S3
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+  region: "ap-northeast-2",
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_S3_BUCKET_NAME,
+    key: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  }),
+});
+
 app.get("/", (req, res) => {
   res.send("hi hello");
 });
@@ -39,6 +60,10 @@ app.get("/", (req, res) => {
 app.use("/api/product", productRouter);
 
 app.use("/api/category", categoryRouter);
+
+app.post("/upload", upload.array("photos"), (req, res) => {
+  res.send(req.files);
+});
 
 // Start server
 app.listen(port, () => {
