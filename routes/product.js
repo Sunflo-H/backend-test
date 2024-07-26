@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/product");
 const productController = require("../controllers/productController");
 
 // express.Router()에 이 데이터를 저장하는 행위구만, 최종적으로 Router를 export해서 server.js에서 사용하는거지

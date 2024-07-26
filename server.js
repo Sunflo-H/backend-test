@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const productsRouter = require("./routes/products");
+const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
 require("dotenv").config();
 
@@ -26,7 +26,7 @@ async function connectToMongoDB() {
     console.log("몽고디비 연결 성공");
   } catch (err) {
     console.log("몽고디비 연결 실패");
-    console.log("그 에러 원인이다 : ", err);
+    console.log("그 에러 원인 : ", err);
   }
 }
 connectToMongoDB();
@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/api/products", productsRouter);
+app.use("/api/product", productRouter);
 
 app.use("/api/category", categoryRouter);
 
