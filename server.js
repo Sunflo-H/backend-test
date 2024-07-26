@@ -42,7 +42,7 @@ const s3 = new S3Client({
   },
   region: process.env.AWS_REGION,
 });
-
+console.log("hi");
 const upload = multer({
   storage: multerS3({
     s3: s3,
