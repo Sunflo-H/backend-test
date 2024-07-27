@@ -64,6 +64,10 @@ app.use("/api/product", productRouter);
 
 app.use("/api/category", categoryRouter);
 
+app.post("/upload", upload.array("photos"), (req, res) => {
+  res.send(req.files);
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
