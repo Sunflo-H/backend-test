@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/productController");
+const { S3Client } = require("@aws-sdk/client-s3");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+require("dotenv").config();
 
 const s3 = new S3Client({
   credentials: {
@@ -9,6 +13,7 @@ const s3 = new S3Client({
   },
   region: process.env.AWS_REGION,
 });
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -27,6 +32,7 @@ router.get("/", productController.getAllProducts);
 router.get("/:id", productController.getProductById);
 
 // 새로운 상품 생성
-router.post("/create", productController.createProduct);
+// router.post("/create", productController.createProduct);
+router.post("/create", upload.array("photos"), productController.createProduct);
 
 module.exports = router;

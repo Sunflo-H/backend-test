@@ -37,13 +37,13 @@ const productSchema = new Schema({
   status: {
     // "Sale", "hide", ""
     type: String,
-    required: true,
+    // required: true,
   },
-  stock: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
+  // stock: {
+  //   type: Number,
+  //   required: true,
+  //   min: 0,
+  // },
 });
 
 // 모델 이름은 Product, 컬렉션이름은 Product 임을 명시적으로 설정
