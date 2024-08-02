@@ -43,8 +43,6 @@ const s3 = new S3Client({
   region: process.env.AWS_REGION,
 });
 
-console.log("revert 테스트용 2");
-
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -66,6 +64,10 @@ app.use("/api/category", categoryRouter);
 
 app.post("/upload", upload.array("photos"), (req, res) => {
   res.send(req.files);
+});
+
+app.use("/image", (req, res) => {
+  res.send();
 });
 
 // Start server
