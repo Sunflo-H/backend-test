@@ -1,23 +1,34 @@
 const Product = require("../models/product");
 
 exports.createProduct = async (req, res) => {
-  console.log(req);
   try {
-    const { name, description, price, imageUrl, category } = req.body;
-
+    const {
+      name,
+      price,
+      category,
+      size,
+      color,
+      description,
+      imageUrl,
+      status,
+    } = req.body;
+    console.log(req.body);
     // 새 상품 객체 생성
     const newProduct = new Product({
       name,
-      description,
       price,
-      imageUrl,
       category,
+      size,
+      color,
+      description,
+      imageUrl,
+      status,
       createdAt: new Date(),
     });
 
     // 상품 저장
     const savedProduct = await newProduct.save();
-
+    console.log(savedProduct);
     // 성공적으로 저장된 상품을 클라이언트에게 응답
     res.status(201).json(savedProduct);
   } catch (error) {
