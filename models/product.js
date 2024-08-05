@@ -27,11 +27,15 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: "Category", // Category 컬렉션을 참조
-    required: true,
+  category:{
+    type:String,
+    required:true,
   },
+  // category: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Category", // Category 컬렉션을 참조
+  //   required: true,
+  // },
   color: [{ type: String, trim: true }], // ["S","M","L","XL"]
   size: [{ type: String, trim: true }], // ["Black", "Red", "Green", "Blue", "Yellow"]
   status: {
@@ -39,11 +43,6 @@ const productSchema = new Schema({
     type: String,
     // required: true,
   },
-  // stock: {
-  //   type: Number,
-  //   required: true,
-  //   min: 0,
-  // },
 });
 
 // 모델 이름은 Product, 컬렉션이름은 Products 임을 명시적으로 설정
